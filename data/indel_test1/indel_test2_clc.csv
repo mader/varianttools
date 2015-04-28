@@ -1,0 +1,4 @@
+Chromosome;Region;Type;Reference;Allele;Reference allele;Length;Linkage;Zygosity;Count;Coverage;Frequency;Probability;Forward read count;Reverse read count;Forward/reverse balance;Average quality;Evidence;Repeat;Variant ratio;# Reads;Sequence complexity
+test1;11..15;Deletion;TGGCG;-;No;5;;Homozygous;;;;;;;;;Paired breakpoint;;1;9;0,469
+test1;25^26;Insertion;-;GCTGG;No;5;;Homozygous;;;;;;;;;Paired breakpoint;;1;5;0,341
+test1;36..40;Deletion;GAGCA;-;No;5;;Homozygous;;;;;;;;;Paired breakpoint;;1;7;0,143

@@ -1,0 +1,2 @@
+Mapping;Reference Position;Type;Length;Reference;Allele;Linkage;Zygosity;Count;Coverage;Frequency;Forward/reverse balance;Average quality
+test1;7;SNV;1;G;A;;Homozygous;10;10;100;0,066;34,036
