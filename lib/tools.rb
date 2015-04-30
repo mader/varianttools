@@ -192,6 +192,9 @@ def make_report_for_sequinom(contigs)
   
       if(sequinom_variant = all_seqinom_variants[all_seqinom_variants_key])
         sequinom_variant.specimen_alts[va.specimen_name] = va.alt
+        sequinom_variant.specimen_zygs[va.specimen_name] = va.zygosity
+        sequinom_variant.specimen_covs[va.specimen_name] = va.coverage
+        sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
         sequinom_variant.number_of_alts += 1
         sequinom_variant.clc_variants.push(va)
   
@@ -210,6 +213,12 @@ def make_report_for_sequinom(contigs)
         sequinom_variant.clc_variants = Array.new().push(va)
         sequinom_variant.specimen_alts = specimen_alts
         sequinom_variant.specimen_alts[va.specimen_name] = va.alt
+        sequinom_variant.specimen_zygs = Hash.new
+        sequinom_variant.specimen_zygs[va.specimen_name] = va.zygosity
+        sequinom_variant.specimen_covs = Hash.new
+        sequinom_variant.specimen_covs[va.specimen_name] = va.coverage
+        sequinom_variant.specimen_freqs = Hash.new
+        sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
         sequinom_variant.number_of_alts = 1
         sequinom_variant.length = va.length
 
