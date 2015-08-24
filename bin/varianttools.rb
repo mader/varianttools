@@ -21,6 +21,7 @@ require '../lib/constants.rb'
 require '../lib/clc_variant.rb'
 require '../lib/sequinom_variant.rb'
 require '../lib/option_parser.rb'
+require '../lib/file_output.rb'
 require 'logger'
 
 options = OptionParser.parse(ARGV)
@@ -81,7 +82,12 @@ logger.info("Write data to file...")
 ref_name = File.basename(options.ref_file)
 header = true
 
+file_output = FileOutput.new
+
+file_output.write_table(options, s_variants)
+
 #write all sequinome variants to file
+=begin
 open('output.tsv', 'w') do |f|
   s_variants.each do |k,v|
     if(header)
@@ -113,7 +119,9 @@ open('output.tsv', 'w') do |f|
       end
   end
 end
+=end
+
 
 logger.info("")
 
-end
+#end

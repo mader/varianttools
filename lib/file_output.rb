@@ -28,7 +28,7 @@ class FileOutput
   def initialize()
   end
 
-  def write_table(options, variants, output_type)
+  def write_table(options, variants)
     
     ref_name = File.basename(options.ref_file)
     header = true
@@ -63,6 +63,7 @@ class FileOutput
           if(filter)
            f.puts k + "\t" + sq.to_s
           end
+        end
       end
     end
   end
