@@ -22,7 +22,7 @@ require '../lib/sequinom_variant.rb'
 require 'bio'
 require 'logger'
 
-class SNPTools
+class VariantTools
 
   attr_accessor :specimen_names, :ref_seq, :ref_length, :min_flank1,
                 :min_flank2, :type, :logger

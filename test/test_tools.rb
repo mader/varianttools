@@ -28,7 +28,7 @@ class TestTools < MiniTest::Test
 
     logger = Logger.new(STDOUT)
 
-    @var = SNPTools.new(@ref_seq, 5, 4, :SNP, logger)
+    @var = VariantTools.new(@ref_seq, 5, 4, :SNP, logger)
 
     @clc_variants = @var.read_files("../data/unit_tests/")
 

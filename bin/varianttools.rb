@@ -52,7 +52,7 @@ end
 
 logger.info("-----------")
 
-snp_tools = SNPTools.new(options.ref_file,
+snp_tools = VariantTools.new(options.ref_file,
                          options.flanks[0].to_i,
                          options.flanks[1].to_i,
                          options.type,
