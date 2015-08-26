@@ -16,8 +16,8 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
 
-require '../lib/clc_variant.rb'
-require '../lib/constants.rb'
+require_relative '../lib/clc_variant.rb'
+require_relative '../lib/constants.rb'
 
 class SequinomVariant < CLCVariant
 
@@ -64,6 +64,7 @@ class SequinomVariant < CLCVariant
     if(calling_type.to_s.eql?(SNP))
       crit_avg_bal = @critical_for_rev_balance ? @for_rev_balance.round(3).to_s : ""
     end
+    #what about INDELs?
     return crit_avg_bal
   end
   

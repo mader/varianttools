@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gem 'logger', '>= 1.2.8'
 gem 'OptionParser', '>= 0.5.1'
 gem 'bio', '>= 1.5.0'
+gem 'byebug', '>= 6.0.2'
 
 # Testing
 gem 'rspec', '>= 3.3.0'

@@ -1,3 +1,3 @@
 Reference Position;Type;Length;Reference;Allele;Linkage;Zygosity;Count;Coverage;Frequency;Forward/reverse balance;Average quality
 5;SNV;1;A;G;;Homozygous;10;10;100;0,066;34,036
-11;MNV;2;GA;TC;;Homozygous;15;15;100;0,292;37,508
+11;MNV;2;TG;GA;;Homozygous;15;15;100;0,292;37,508

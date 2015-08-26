@@ -17,7 +17,7 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
 
-require '../lib/variant.rb'
+require_relative '../lib/variant'
 
 class CLCVariant < Variant
 

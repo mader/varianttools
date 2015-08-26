@@ -16,9 +16,9 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
 
-require '../lib/constants.rb'
-require '../lib/clc_variant.rb'
-require '../lib/sequinom_variant.rb'
+require_relative '../lib/constants.rb'
+require_relative '../lib/clc_variant.rb'
+require_relative '../lib/sequinom_variant.rb'
 require 'bio'
 require 'logger'
 
@@ -35,6 +35,7 @@ class VariantTools
     @min_flank2 = min_flank2
     @type = type
     @contig = ""
+    @nof_contigs = 0
     @logger = logger
 
     logger.info("Read reference file...")
@@ -44,7 +45,9 @@ class VariantTools
 
     @ff.each do |entry|
       @ref_length.store(entry.definition, entry.length)
+      # if there is only one sequence we can set it here
       @contig = entry.definition
+      @nof_contigs += 1
       logger.info(entry.definition + ": " + entry.length.to_s + "bp")
     end
 
@@ -72,6 +75,7 @@ class VariantTools
 
     File.open(file, "r") do |f|
       f.each_line do |line|
+        
         sline = line.chop.split(";")
 
         #Associate header names with column ids.
@@ -88,12 +92,25 @@ class VariantTools
         else
 
           locus = ""
-
+          
           if(@type.to_s.eql?(SNP))
             locus = MAPPING
           end
           if(@type.to_s.eql?(INDEL))
             locus = CHR
+          end
+
+          if(!columns.key?(locus) && @nof_contigs > 1)
+            begin
+            raise Exception,"Error: Your input data does not specify a contig" \
+                  "name. But your fasta file contains more than one" \
+                  "sequence. Please use either a fasta file with just one" \
+                  "sequence, or specify the contig to use in your csv file(s)."
+                  
+            rescue Exception => e
+              puts e.message
+              exit(1)
+            end
           end
 
           if(columns.key?(locus))
