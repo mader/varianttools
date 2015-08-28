@@ -117,5 +117,6 @@ describe VariantTools do
   end
 
   context "make sequinom report" do
+  	pending("Do we need this?")
   end
 end
