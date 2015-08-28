@@ -50,4 +50,4 @@ SV        = "CNV"
 #Meta values
 APP_NAME = "Variant Tools"
 VERSION = "1.0"
-VDATE = "29-04-2015"
+VDATE = "28-08-2015"
