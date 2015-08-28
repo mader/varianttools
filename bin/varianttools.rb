@@ -18,6 +18,7 @@
 
 require_relative '../lib/tools.rb'
 require_relative '../lib/constants.rb'
+require_relative '../lib/version.rb'
 require_relative '../lib/clc_variant.rb'
 require_relative '../lib/sequinom_variant.rb'
 require_relative '../lib/option_parser.rb'

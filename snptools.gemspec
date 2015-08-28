@@ -3,8 +3,8 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "Variant Tools"
-  spec.version       = '1.0'
+  spec.name          = APP_NAME
+  spec.version       = VERSION
   spec.authors       = ["Malte Mader"]
   spec.email         = ["malte.mader@ti.bund.de"]
   spec.summary       = %q{Process and generate different formats containing variation data}
@@ -14,6 +14,6 @@ Gem::Specification.new do |spec|
 
   spec.files         = ['lib/tools.rb']
   spec.executables   = ['bin/varianttools.rb']
-  spec.test_files    = ['tests/test_snptools.rb']
+  spec.test_files    = ['spec/']
   spec.require_paths = ["lib"]
 end
