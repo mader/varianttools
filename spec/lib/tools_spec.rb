@@ -90,6 +90,18 @@ describe VariantTools do
 
   end
 
+  context "test user input" do
+  	it "fails because of different contig names in fasta file and csv file" do
+  	  expect{
+      	get_clc_variants_from_file_input("/data/test3.fasta",
+      	                                 "/data/snp_contigs/",
+      	                                 4,
+      	                                 5,
+      	                                 :SNP)
+      }.to raise_error(IOError)
+    end
+  end
+
   context "read INDEL data" do
 
   	before(:each) do

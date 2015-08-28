@@ -112,10 +112,12 @@ class VariantTools
             end
           end
 
-          #Feature: test if contigs in fasta file and in csv file match?
-
           if(columns.key?(locus))
             @contig = sline[columns[locus]].delete("\"")
+            if(!@ref_length.key?(@contig))
+              raise IOError, "Error: your csv file contains contig names " \
+                    "that do not match any contig name in your fasta file"
+            end
           end
           if(contigs.key?(@contig))
             all_variants = contigs[@contig]

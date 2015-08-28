@@ -64,8 +64,9 @@ logger.info("Read Files...")
 begin
   variants = snp_tools.read_files(options.input_folder)
 rescue IOError => e
-              puts e.message
-              exit(1)
+  puts e.message
+  logger.error(e.message)
+  exit(1)
 end
 
 logger.info("Generate summary table...")
