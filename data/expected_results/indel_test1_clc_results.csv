@@ -2,5 +2,5 @@ Mapping	Reference Position	Type	Length	Reference (test.fasta)	indel_test1_clc	in
 test1	11	Deletion	5	TGGCG	-	-	2		AGCAGTGGT	[TGGCG/-]	ATGACGTAG
 test1	26	Insertion	5	-	GCTGA	GCTGG	2		TGACGTAGC	[-/GCTGA/GCTGG]	AGTGTGACT
 test1	36	Deletion	5	GAGCA	-	-	2		GTGTGACTG	[GAGCA/-]	
-test1	43	Deletion	3	ATG	-	ATG	1			[ATG/-]	ACTGG
-test1	52	Insertion	5	-	CGCTC	-	1		CTGGA	[-/CGCTC]	TTTTACGAC
+test1	43	Deletion	3	ATG	-	nc	1			[ATG/-]	ACTGG
+test1	52	Insertion	5	-	CGCTC	nc	1		CTGGA	[-/CGCTC]	TTTTACGAC

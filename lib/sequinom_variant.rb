@@ -79,8 +79,9 @@ class SequinomVariant < CLCVariant
     end
 
     alt_str =  "[" + @ref + "/"
-    shared_alts.each_with_index do |sa, i|
-        if (i < shared_alts.size-1)
+    alts_without_nc = shared_alts.reject{ |entry| entry.eql?("nc") }
+    alts_without_nc.each_with_index do |sa, i|
+        if (i < alts_without_nc.size-1)
           alt_str += sa + "/"
         else
           alt_str += sa

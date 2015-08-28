@@ -227,7 +227,7 @@ def make_report_for_sequinom(contigs)
         specimen_alts = Hash.new
 
         @specimen_names.each do |n|
-          specimen_alts.store(n, va.ref)
+          specimen_alts.store(n, "nc")
         end
 
         sequinom_variant.clc_variants = Array.new().push(va)
