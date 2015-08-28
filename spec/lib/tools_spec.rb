@@ -1,17 +1,19 @@
 require 'spec_helper'
-require 'byebug'
+require 'option_parser'
+require_relative '../support/analysis_helper'
 
 describe VariantTools do
+  include AnalysisHelper
 
   context "read SNP data without contigs" do
 
     before(:each) do
-  	  @ref_seq = Dir.pwd + "/data/test.fasta"
-      logger = Logger.new(STDOUT)
-      logger.level = Logger::ERROR
-      @variant_tool = VariantTools.new(@ref_seq, 5, 4, :SNP, logger)
-      @clc_variants = @variant_tool.read_files(Dir.pwd + "/data/unit_tests/")
-      #@sequinom_variants = @variant_tool.make_report_for_sequinom(@clc_variants)
+      result = get_clc_variants_from_file_input("/data/test.fasta",
+      	                                        "/data/unit_tests/",
+      	                                        4,
+      	                                        5,
+      	                                        :SNP)
+      @clc_variants = result[0]
     end
 
     it "contains one contig" do
@@ -46,11 +48,12 @@ describe VariantTools do
   context "read SNP data with contigs" do
 
   	before(:each) do
-  	  @ref_seq = Dir.pwd + "/data/test2.fasta"
-      logger = Logger.new(STDOUT)
-      logger.level = Logger::ERROR
-      @variant_tool = VariantTools.new(@ref_seq, 5, 4, :SNP, logger)
-      @clc_variants = @variant_tool.read_files(Dir.pwd + "/data/snp_contigs/")
+      result = get_clc_variants_from_file_input("/data/test2.fasta",
+      	                                        "/data/snp_contigs/",
+      	                                        4,
+      	                                        5,
+      	                                        :SNP)
+      @clc_variants = result[0]
     end
 
     it "contains 2 contigs" do
@@ -72,11 +75,12 @@ describe VariantTools do
   context "read INDEL data" do
 
   	before(:each) do
-  	  @ref_seq = Dir.pwd + "/data/test.fasta"
-      logger = Logger.new(STDOUT)
-      logger.level = Logger::ERROR
-      @variant_tool = VariantTools.new(@ref_seq, 5, 4, :INDEL, logger)
-      @clc_variants = @variant_tool.read_files(Dir.pwd + "/data/indel_test1/")
+      result = get_clc_variants_from_file_input("/data/test.fasta",
+      	                                         "/data/indel_test1/",
+      	                                         4,
+      	                                         5,
+      	                                         :SNP)
+      @clc_variants = result[0]
     end
 
     it "contains 1 contig" do
@@ -95,7 +99,5 @@ describe VariantTools do
   end
 
   context "make sequinom report" do
-    it "make report for sequinom"
   end
-
 end

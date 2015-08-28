@@ -61,7 +61,9 @@ class VariantTools
 
   #Read all variants from all files and store them in an array of variant
   #objects.
-  Dir.glob(file_path + '*.csv') do |file|
+  files = Dir.glob(file_path + '*.csv').sort
+
+  files.each do |file|
 
     logger.info("Process file: " + file)
 
@@ -69,6 +71,7 @@ class VariantTools
     columns = Hash.new
    
     name = File.basename(file).split(".")[0]
+    
     @specimen_names.push(name)
 
     all_variants = nil
@@ -106,12 +109,14 @@ class VariantTools
                   "name. But your fasta file contains more than one" \
                   "sequence. Please use either a fasta file with just one" \
                   "sequence, or specify the contig to use in your csv file(s)."
-                  
+
             rescue Exception => e
               puts e.message
               exit(1)
             end
           end
+
+          #test if contigs in fasta file and in csv file match?
 
           if(columns.key?(locus))
             @contig = sline[columns[locus]].delete("\"")
@@ -152,7 +157,7 @@ class VariantTools
           forrevbal = sline[columns[FORREVBAL]].delete("\"").gsub(',', '.').to_f
           qual = sline[columns[QUAL]].delete("\"").gsub(',', '.').to_f
 
-          #INDEL specific#
+          #INDEL specific
           if(columns[REPEAT] != nil)
             repeat = sline[columns[REPEAT]].delete("\"")
           end

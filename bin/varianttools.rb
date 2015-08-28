@@ -79,8 +79,8 @@ s_variants = snp_tools.make_report_for_sequinom(variants)
 
 logger.info("Write data to file...")
 
-ref_name = File.basename(options.ref_file)
-header = true
+#ref_name = File.basename(options.ref_file)
+#header = true
 
 file_output = FileOutput.new
 

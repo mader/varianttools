@@ -16,9 +16,9 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
 
-require '../lib/constants.rb'
-require '../lib/sequinom_variant.rb'
-require '../lib/option_parser.rb'
+require_relative '../lib/constants.rb'
+require_relative '../lib/sequinom_variant.rb'
+require_relative '../lib/option_parser.rb'
 require 'logger'
 
 class FileOutput

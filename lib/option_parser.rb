@@ -18,7 +18,7 @@
 
 require 'optparse'
 require 'ostruct'
-require '../lib/constants.rb'
+require_relative '../lib/constants.rb'
 
 class OptionParser
 
