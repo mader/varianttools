@@ -60,7 +60,13 @@ snp_tools = VariantTools.new(options.ref_file,
                          logger)
 
 logger.info("Read Files...")
-variants = snp_tools.read_files(options.input_folder)
+
+begin
+  variants = snp_tools.read_files(options.input_folder)
+rescue IOError => e
+              puts e.message
+              exit(1)
+end
 
 logger.info("Generate summary table...")
 s_variants = snp_tools.make_report_for_sequinom(variants)

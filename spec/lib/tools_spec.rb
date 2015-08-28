@@ -59,7 +59,7 @@ describe VariantTools do
       v_tool = VariantTools.new(r_seq, 5, 4, :SNP, log)
       expect{
       	v_tool.read_files(Dir.pwd + "/data/unit_tests/")
-      }.to raise_error(Exception)
+      }.to raise_error(IOError)
     end
   end
 
