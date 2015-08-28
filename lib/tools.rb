@@ -116,7 +116,7 @@ class VariantTools
             end
           end
 
-          #test if contigs in fasta file and in csv file match?
+          #Feature: test if contigs in fasta file and in csv file match?
 
           if(columns.key?(locus))
             @contig = sline[columns[locus]].delete("\"")
@@ -251,10 +251,6 @@ def make_report_for_sequinom(contigs)
     sequinom_variants = all_seqinom_variants.values.sort {|x,y|
       x.position <=> y.position
     }
-
-    #sequinom_variants.each do |sv|
-    #  puts k + " " + sv.to_s
-    #end
 
     #calculate distances to neighbouring snps
     logger.info("--> Calculate flanking sequences...")

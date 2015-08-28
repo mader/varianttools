@@ -16,12 +16,12 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
 
-require '../lib/tools.rb'
-require '../lib/constants.rb'
-require '../lib/clc_variant.rb'
-require '../lib/sequinom_variant.rb'
-require '../lib/option_parser.rb'
-require '../lib/file_output.rb'
+require_relative '../lib/tools.rb'
+require_relative '../lib/constants.rb'
+require_relative '../lib/clc_variant.rb'
+require_relative '../lib/sequinom_variant.rb'
+require_relative '../lib/option_parser.rb'
+require_relative '../lib/file_output.rb'
 require 'logger'
 
 options = OptionParser.parse(ARGV)
@@ -61,67 +61,12 @@ snp_tools = VariantTools.new(options.ref_file,
 logger.info("Read Files...")
 variants = snp_tools.read_files(options.input_folder)
 
-#variants.each do |k,v|
-#  v.each do |v2|
-#    puts k + "\t" + v2.to_s
-#  end
-#end
-#puts "\n\n"
-
 logger.info("Generate summary table...")
 s_variants = snp_tools.make_report_for_sequinom(variants)
 
-#s_variants.each do |k,v|
-#  v.each do |v2|
-#    puts k + "\t" + v2.to_s
-#  end
-#end
-
 logger.info("Write data to file...")
 
-#ref_name = File.basename(options.ref_file)
-#header = true
-
 file_output = FileOutput.new
-
 file_output.write_table(options, s_variants)
 
-#write all sequinome variants to file
-=begin
-open('output.tsv', 'w') do |f|
-  s_variants.each do |k,v|
-    if(header)
-      f.puts MAPPING + "\t" + REFPOS + "\t" + TYPE + "\t" + LENGTH + "\t" + REF + " (#{ref_name})" + "\t" + \
-      v[0].specimen_alts_to_s("keys") + "\t" + \
-      NOF_DEV_FROM_REF + "\t" + \
-      CRIT_FORREVBAL + "\t" + LEFT_FLANK + "\t" + \
-      ALT + "\t" + RIGHT_FLANK
-      header = false
-    end
-    v.each do |sq|
-
-      filter = true
-      conditions = Array.new()
-
-      if(options.discard_empty_fanks)
-        conditions.push(!sq.left_flank.eql?("") && !sq.right_flank.eql?(""))
-      end
-      if(options.freqency_thr > 0)
-        conditions.push(sq.frequency > options.freqency_thr)
-      end
-
-      conditions.each do |c|
-        filter = filter && c
-      end
-
-      if(filter)
-       f.puts k + "\t" + sq.to_s
-      end
-  end
-end
-=end
-
-
 logger.info("")
-
-#end
