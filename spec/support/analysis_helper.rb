@@ -24,7 +24,6 @@ module AnalysisHelper
                                        min_flank2,
                                        calling_type)
     variant_tool = create_variant_tools(fasta_file,
-                                        input_dir,
                                         min_flank1,
                                         min_flank2,
                                         calling_type)
@@ -60,10 +59,7 @@ module AnalysisHelper
     return expected_result, output_result
   end
 
-  private
-
   def create_variant_tools(fasta_file,
-                           input_dir,
                            min_flank1,
                            min_flank2,
                            calling_type)

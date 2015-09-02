@@ -22,7 +22,7 @@ require_relative '../lib/variant'
 class CLCVariant < Variant
 
   attr_accessor :count, :coverage, :frequency, :for_rev_balance, :repeat,
-                :nof_reads, :seq_complexity
+                :nof_reads, :seq_complexity, :mapping_coverage
                 
   def initialize(specimen_name,
                  position,
@@ -55,13 +55,15 @@ class CLCVariant < Variant
     @repeat = ""
     @nof_reads = 0
     @seq_complexity = 0.0
+    #optional coverage
+    @mapping_coverage = -1
   end
   
   def to_s
     return @specimen_name + "\t" + @position.to_s + "\t" + @type + "\t" + \
            @length.to_s + "\t" + @ref + "\t" + @alt + "\t" + \
-           @zygosity + "\t" + @count.to_s + "\t" + @coverage.to_s + "\t" + \
-           @frequency.to_s + "\t" + @for_rev_balance.to_s + "\t" + \
-           @quality.to_s
+           @mapping_coverage.to_s + "\t" + @zygosity + "\t" + @count.to_s + "\t" + \
+           @coverage.to_s + "\t" + @frequency.to_s + "\t" + \
+           @for_rev_balance.to_s + "\t" + @quality.to_s
   end
 end

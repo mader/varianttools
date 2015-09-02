@@ -23,6 +23,34 @@ require_relative '../support/analysis_helper'
 describe VariantTools do
   include AnalysisHelper
 
+  context "read mapping coverage data" do
+
+    before(:each) do
+      @vtools = create_variant_tools("/data/test.fasta",
+                                                4,
+                                                5,
+                                                :SNP)
+      @vtools.read_mapping_coverage(Dir.pwd + "/data/coverage_data_unit_tests/")
+    end
+
+    it "contains 80 bases" do
+      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"].size).to be(80)
+    end
+
+    it "contains one contig" do
+      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"].size).to be(1)
+    end
+
+    it "has coverage 5 at position 1" do
+      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"][1]).to be(5)
+    end
+
+    it "has coverage 7 at position 2" do
+      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"][2]).to be(7)
+    end
+
+  end
+
   context "read SNP data without contigs" do
 
     before(:each) do
@@ -44,12 +72,12 @@ describe VariantTools do
 
     it "displays first SNP" do
       expect(@clc_variants["test1"][0].to_s).to eql("snp_unittest_clc\t5\t" \
-      "SNP\t1\tA\tG\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
+      "SNP\t1\tA\tG\t-1\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
     end
 
     it "displays first MNP" do
       expect(@clc_variants["test1"][1].to_s).to eql("snp_unittest_clc\t11\t" \
-      "MNP\t2\tTG\tGA\tHomozygous\t15\t15\t100.0\t0.292\t37.508")
+      "MNP\t2\tTG\tGA\t-1\tHomozygous\t15\t15\t100.0\t0.292\t37.508")
     end
 
     it "raises exeption on > 2 fasta sequences" do
@@ -80,12 +108,12 @@ describe VariantTools do
 
     it "contig 'test1' displays one SNP" do
       expect(@clc_variants["test1"][0].to_s).to eql("snp_test4_clc\t7\t" \
-      "SNP\t1\tG\tA\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
+      "SNP\t1\tG\tA\t-1\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
     end
 
     it "contig 'test2' displays one SNP" do
       expect(@clc_variants["test2"][0].to_s).to eql("snp_test5_clc\t7\t" \
-      "SNP\t1\tT\tC\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
+      "SNP\t1\tT\tC\t-1\tHomozygous\t10\t10\t100.0\t0.066\t34.036")
     end
 
   end
@@ -123,7 +151,7 @@ describe VariantTools do
 
      it "displays first INDEL" do
       expect(@clc_variants["test1"][0].to_s).to eql("indel_test1_clc\t11\t" \
-      "Deletion\t5\tTGGCG\t-\tHomozygous\t0\t0\t0.0\t0.0\t0.0")
+      "Deletion\t5\tTGGCG\t-\t-1\tHomozygous\t0\t0\t0.0\t0.0\t0.0")
     end
 
   end

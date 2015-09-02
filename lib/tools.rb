@@ -21,11 +21,12 @@ require_relative '../lib/clc_variant.rb'
 require_relative '../lib/sequinom_variant.rb'
 require 'bio'
 require 'logger'
+require 'byebug'
 
 class VariantTools
 
   attr_accessor :specimen_names, :ref_seq, :ref_length, :min_flank1,
-                :min_flank2, :type, :logger
+                :min_flank2, :type, :logger, :mapping_coverages
 
   def initialize(ref_seq, min_flank1, min_flank2, type, logger)
     @specimen_names = Array.new
@@ -37,6 +38,7 @@ class VariantTools
     @contig = ""
     @nof_contigs = 0
     @logger = logger
+    @mapping_coverages = nil
 
     logger.info("Read reference file...")
     logger.info("Contig lengths:")
@@ -53,6 +55,39 @@ class VariantTools
 
     logger.info("--------------------")
 
+  end
+
+  def read_mapping_coverage(file_path)
+
+    @mapping_coverages = Hash.new
+
+    files = Dir.glob(file_path + '*.csv').sort
+
+    files.each do |file|
+
+      name = File.basename(file).split(".")[0]
+      contigs = Hash.new
+      pos_and_cov = nil
+
+      File.open(file, "r") do |f|
+        f.each_line do |line|
+          
+            sline = line.chop.split("\t")
+            
+            contig_name = sline[0]
+            pos = sline[1].to_i
+            cov = sline[10].to_i
+
+            if(!contigs.key?(contig_name))
+              pos_and_cov = Hash.new
+              contigs.store(contig_name, pos_and_cov)
+            end
+
+            pos_and_cov.store(pos, cov)
+        end
+      end
+      mapping_coverages.store(name, contigs)
+    end
   end
 
   def read_files(file_path)
@@ -184,6 +219,13 @@ class VariantTools
           variant.repeat = repeat
           variant.nof_reads = nof_reads
           variant.seq_complexity = seq_complexity
+
+          if(@mapping_coverages != nil )
+            puts name
+            puts @mapping_coverages[name]
+            mapping_coverage = @mapping_coverages[name][@contig][refpos]
+            variant.mapping_coverage = mapping_coverage
+          end
 
           all_variants.push(variant)
 
