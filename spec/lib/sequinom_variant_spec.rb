@@ -37,6 +37,11 @@ require 'spec_helper'
 
       @s_variant.number_of_alts = 3
 
+      @s_variant.specimen_mapping_cov = Hash.new
+      @s_variant.specimen_mapping_cov.store("SP1", -1)
+      @s_variant.specimen_mapping_cov.store("SP2", -1)
+      @s_variant.specimen_mapping_cov.store("SP3", -1)
+
       @s_variant.crit_poly_strech = false
       @s_variant.critical_for_rev_balance = true
       @s_variant.for_rev_balance = 0.5
@@ -69,12 +74,13 @@ require 'spec_helper'
     end
 
     it "prints specimen names" do
-      string = @s_variant.specimen_alts_to_s("keys")
-      expect(string).to eql("SP1\tSP2\tSP3")
+      string = @s_variant.specimen_alts_and_cov_to_s("keys")
+      expect(string).to eql("SP1 (alt)\tSP1 (coverage)\tSP2 (alt)" \
+                            "\tSP2 (coverage)\tSP3 (alt)\tSP3 (coverage)")
     end
 
   	it "prints out its SNP contents" do
-  	  expect(@s_variant.to_s).to eql("5\tSNV\t1\tA\tA\tT\tG\t3\t0.5" \
-  	  	                              "\tATTA\t[A/T/G]\tGCCG")
+  	  expect(@s_variant.to_s).to eql("5\tSNV\t1\tA\tA\t-1\tT\t-1\tG\t-1\t3" \
+                                     "\t0.5\tATTA\t[A/T/G]\tGCCG")
   	end
   end

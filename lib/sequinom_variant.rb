@@ -18,12 +18,14 @@
 
 require_relative '../lib/clc_variant.rb'
 require_relative '../lib/constants.rb'
+require 'byebug'
 
 class SequinomVariant < CLCVariant
 
   attr_accessor :specimen_alts, :shared_alt, :number_of_alts,
                 :specimen_zygs, :specimen_covs, :specimen_freqs,
-                :crit_poly_strech, :critical_for_rev_balance,
+                :specimen_mapping_cov, :crit_poly_strech,
+                :critical_for_rev_balance,
                 :dist_next_variant_left, :dist_next_variant_right,
                 :left_flank, :right_flank, :clc_variants
 
@@ -49,7 +51,7 @@ class SequinomVariant < CLCVariant
     @right_flank = ""
     @shared_alt = ""
     @number_of_alts = 0
-    crit_poly_strech = false 
+    crit_poly_strech = false
     critical_for_rev_balance = false
     @dist_next_variant_left = 0
     @dist_next_variant_right = 0
@@ -92,6 +94,24 @@ class SequinomVariant < CLCVariant
     @shared_alt = alt_str
   end
 
+  def specimen_alts_and_cov_to_s(type)
+    str = ""
+    @specimen_alts.each_with_index do |(k,v),i|
+      if(type == "keys")
+        entry = k + " (alt)" + "\t" + k + " (coverage)"
+      else
+        entry = v + "\t" + @specimen_mapping_cov[k].to_s
+      end
+      if (i < specimen_alts.size-1)
+        str += entry + "\t"
+      else
+        str += entry
+      end
+    end
+    return str
+  end
+
+  #maybe depricated...
   def specimen_alts_to_s(type)
     str = ""
     alt_data = nil
@@ -104,7 +124,7 @@ class SequinomVariant < CLCVariant
 
     alt_data.each_with_index do |d,i|
       if (i < alt_data.size-1)
-        str += d + "\t" 
+        str += d + "\t"
       else
         str += d
       end
@@ -127,7 +147,7 @@ class SequinomVariant < CLCVariant
     #        @shared_alt + "\t" + @right_flank
 
     str = @position.to_s + "\t" + @type + "\t" + @length.to_s + "\t" + \
-          @ref + "\t" + specimen_alts_to_s("values") + "\t" + \
+          @ref + "\t" + specimen_alts_and_cov_to_s("values") + "\t" + \
           @number_of_alts.to_s + "\t" + \
           crit_for_rev_bal_to_s + "\t" + @left_flank  + "\t" + \
           @shared_alt + "\t" + @right_flank

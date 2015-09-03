@@ -38,7 +38,7 @@ class FileOutput
       variants.each do |k,v|
         if(header)
           f.puts MAPPING + "\t" + REFPOS + "\t" + TYPE + "\t" + LENGTH + "\t" + REF + " (#{ref_name})" + "\t" + \
-          v[0].specimen_alts_to_s("keys") + "\t" + \
+          v[0].specimen_alts_and_cov_to_s("keys") + "\t" + \
           NOF_DEV_FROM_REF + "\t" + \
           CRIT_FORREVBAL + "\t" + LEFT_FLANK + "\t" + \
           ALT + "\t" + RIGHT_FLANK
