@@ -28,6 +28,7 @@ class OptionParser
     options = OpenStruct.new
     options.ref_file = ""
     options.input_folder = ""
+    options.coverage_input_folder = ""
     options.type = ""
     options.flanks = [75,50]
     options.discard_empty_fanks = false
@@ -49,7 +50,12 @@ class OptionParser
       opts.on('-i', '--input [DIR]', "Specify the input folder containing all",
                "input files. (default is .)") do |f|
       options.input_folder = f 
-      end 
+      end
+
+      opts.on('-I', '--coverage-input [DIR]', "Specify the input folder containing all",
+               "coverage files.") do |f|
+      options.coverage_input_folder = f 
+      end
 
       opts.on('-t', '--type OPT', [:SNP, :INDEL], "Specify the data type to be processed.",
                "(Valid values are SNP, INDEL)") do |f|

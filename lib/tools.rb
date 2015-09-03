@@ -221,8 +221,6 @@ class VariantTools
           variant.seq_complexity = seq_complexity
 
           if(@mapping_coverages != nil )
-            puts name
-            puts @mapping_coverages[name]
             mapping_coverage = @mapping_coverages[name][@contig][refpos]
             variant.mapping_coverage = mapping_coverage
           end

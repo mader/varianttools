@@ -43,6 +43,9 @@ end
 
 logger.info("Reference file: " + options.ref_file)
 logger.info("Input folder: " + folder)
+if(!options.coverage_input_folder.eql?(""))
+logger.info("Input coverage folder: " + options.coverage_input_folder)
+end
 logger.info("Data type: " + options.type.to_s)
 logger.info("Flanking length: " + options.flanks[0].to_s + ", " + \
                                   options.flanks[1].to_s)
@@ -59,7 +62,14 @@ snp_tools = VariantTools.new(options.ref_file,
                          options.type,
                          logger)
 
-logger.info("Read Files...")
+if(!options.coverage_input_folder.eql?(""))
+  logger.info("Read coverage files...")
+  snp_tools.read_mapping_coverage(options.coverage_input_folder)
+end
+
+logger.info("Read variant files...")
+
+variants = nil
 
 begin
   variants = snp_tools.read_files(options.input_folder)
