@@ -18,7 +18,6 @@
 
 require_relative '../lib/clc_variant.rb'
 require_relative '../lib/constants.rb'
-require 'byebug'
 
 class SequinomVariant < CLCVariant
 

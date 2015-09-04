@@ -20,6 +20,7 @@ module AnalysisHelper
 
   def get_clc_variants_from_file_input(fasta_file,
                                        input_dir,
+                                       cov_input_dir,
                                        min_flank1,
                                        min_flank2,
                                        calling_type)
@@ -27,16 +28,21 @@ module AnalysisHelper
                                         min_flank1,
                                         min_flank2,
                                         calling_type)
+    if(!cov_input_dir.eql?(""))
+      variant_tool.read_mapping_coverage(Dir.pwd + cov_input_dir)
+    end
     return variant_tool.read_files(Dir.pwd + input_dir), variant_tool
   end
 
   def get_sequinom_variants_from_file_input(fasta_file,
                                             input_dir,
+                                            cov_input_dir,
                                             min_flank1,
                                             min_flank2,
                                             calling_type)
     clc_variants, variant_tool = get_clc_variants_from_file_input(fasta_file,
                                                                    input_dir,
+                                                                   cov_input_dir,
                                                                    min_flank1,
                                                                    min_flank2,
                                                                    calling_type)

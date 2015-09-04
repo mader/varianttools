@@ -21,7 +21,6 @@ require_relative '../lib/clc_variant.rb'
 require_relative '../lib/sequinom_variant.rb'
 require 'bio'
 require 'logger'
-require 'byebug'
 
 class VariantTools
 
@@ -221,8 +220,16 @@ class VariantTools
           variant.seq_complexity = seq_complexity
 
           if(@mapping_coverages != nil )
-            mapping_coverage = @mapping_coverages[name][@contig][refpos]
-            variant.mapping_coverage = mapping_coverage
+            mapping_coverage = 0
+            if(length == 1)
+              mapping_coverage = @mapping_coverages[name][@contig][refpos]
+              variant.mapping_coverage = mapping_coverage
+            else
+              for i in 1..length do
+                mapping_coverage += @mapping_coverages[name][@contig][refpos + (i-1)]
+              end
+              variant.mapping_coverage = (mapping_coverage.to_f/length).round
+            end
           end
 
           all_variants.push(variant)

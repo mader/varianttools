@@ -39,6 +39,7 @@ describe FileOutput do
 
       sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
       	                                             input_dir,
+                                                     "",
       	                                             9,
       	                                             5,
       	                                             :SNP)
@@ -57,6 +58,36 @@ describe FileOutput do
       it_behaves_like "any analysis written to file"
   end
 
+  context "processes SNP data and coverage without contigs" do
+
+    before(:each) do
+      fasta_file = "/data/test.fasta"
+      input_dir = "/data/snp_one_refseq/"
+      coverage_input_dir = "/data/coverage_data_snp_one_refseq/"
+
+      sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
+                                                     input_dir,
+                                                     coverage_input_dir,
+                                                     9,
+                                                     5,
+                                                     :SNP)
+      options = OptionParser.parse(["-f",
+                                     fasta_file,
+                                     "-i",
+                                     input_dir,
+                                     "-I",
+                                     coverage_input_dir,
+                                     "-t",
+                                     "SNP"])
+      @expected_result, @output_result = compare_results(
+                             '/data/expected_results/snp_test1_clc_cov_results.csv',
+                             options,
+                             sequinom_variants)
+    end
+
+      it_behaves_like "any analysis written to file"
+  end
+
   context "processes SNP data with contigs" do
 
     before(:each) do
@@ -65,6 +96,7 @@ describe FileOutput do
 
       sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
       	                                             input_dir,
+                                                     "",
       	                                             9,
       	                                             5,
       	                                             :SNP)
@@ -84,6 +116,37 @@ describe FileOutput do
       it_behaves_like "any analysis written to file"
   end
 
+  context "processes SNP data and coverage with contigs" do
+
+    before(:each) do
+      fasta_file = "/data/test2.fasta"
+      input_dir = "/data/snp_contigs/"
+      coverage_input_dir = "/data/coverage_data_snp_contigs/"
+
+      sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
+                                                     input_dir,
+                                                     coverage_input_dir,
+                                                     9,
+                                                     5,
+                                                     :SNP)
+      options = OptionParser.parse(["-f",
+                                     fasta_file,
+                                     "-i",
+                                     input_dir,
+                                     "-I",
+                                     coverage_input_dir,
+                                     "-t",
+                                     "SNP"])
+      @expected_result, @output_result = compare_results(
+                             '/data/expected_results/snp_test2_clc_cov_results.csv',
+                             options,
+                             sequinom_variants)
+
+    end
+
+      it_behaves_like "any analysis written to file"
+  end
+
   context "processes INDEL data" do
 
     before(:each) do
@@ -92,6 +155,7 @@ describe FileOutput do
 
       sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
                                                      input_dir,
+                                                     "",
                                                      9,
                                                      5,
                                                      :INDEL)
@@ -103,6 +167,37 @@ describe FileOutput do
                                      "INDEL"])
       @expected_result, @output_result = compare_results(
                              '/data/expected_results/indel_test1_clc_results.csv',
+                             options,
+                             sequinom_variants)
+
+    end
+
+      it_behaves_like "any analysis written to file"
+  end
+
+  context "processes INDEL data" do
+
+    before(:each) do
+      fasta_file = "/data/test.fasta"
+      input_dir = "/data/indel_test1/"
+      coverage_input_dir = "/data/coverage_data_indel_test1/"
+
+      sequinom_variants = get_sequinom_variants_from_file_input(fasta_file,
+                                                     input_dir,
+                                                     coverage_input_dir,
+                                                     9,
+                                                     5,
+                                                     :INDEL)
+      options = OptionParser.parse(["-f",
+                                     fasta_file,
+                                     "-i",
+                                     input_dir,
+                                     "-I",
+                                     coverage_input_dir,
+                                     "-t",
+                                     "INDEL"])
+      @expected_result, @output_result = compare_results(
+                             '/data/expected_results/indel_test1_clc_cov_results.csv',
                              options,
                              sequinom_variants)
 

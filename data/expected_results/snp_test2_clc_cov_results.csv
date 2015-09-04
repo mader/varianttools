@@ -1,0 +1,3 @@
+Mapping	Reference Position	Type	Length	Reference (test2.fasta)	snp_test4_clc (alt)	snp_test4_clc (coverage)	snp_test5_clc (alt)	snp_test5_clc (coverage)	Number Of Individual Allels Deviating From Reference	Critical Forward Reverse Balance	Left Flank	Allele	Right Flank
+test1	7	SNP	1	G	A	7	nc	-1	1	0.066	TCGAT	[G/A]	CATGA
+test2	7	SNP	1	T	nc	-1	C	4	1	0.066	TCTGA	[T/C]	CATAT

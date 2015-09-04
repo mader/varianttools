@@ -30,23 +30,23 @@ describe VariantTools do
                                                 4,
                                                 5,
                                                 :SNP)
-      @vtools.read_mapping_coverage(Dir.pwd + "/data/coverage_data_unit_tests/")
+      @vtools.read_mapping_coverage(Dir.pwd + "/data/coverage_data_unit_test/")
     end
 
     it "contains 80 bases" do
-      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"].size).to be(80)
+      expect(@vtools.mapping_coverages["snp_unittest_clc"]["test1"].size).to be(80)
     end
 
     it "contains one contig" do
-      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"].size).to be(1)
+      expect(@vtools.mapping_coverages["snp_unittest_clc"].size).to be(1)
     end
 
     it "has coverage 5 at position 1" do
-      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"][1]).to be(5)
+      expect(@vtools.mapping_coverages["snp_unittest_clc"]["test1"][1]).to be(5)
     end
 
     it "has coverage 7 at position 2" do
-      expect(@vtools.mapping_coverages["mapping_coverage_specimen1"]["test1"][2]).to be(7)
+      expect(@vtools.mapping_coverages["snp_unittest_clc"]["test1"][2]).to be(7)
     end
 
   end
@@ -56,6 +56,7 @@ describe VariantTools do
     before(:each) do
       result = get_clc_variants_from_file_input("/data/test.fasta",
       	                                        "/data/unit_tests/",
+                                                "",
       	                                        4,
       	                                        5,
       	                                        :SNP)
@@ -96,6 +97,7 @@ describe VariantTools do
   	before(:each) do
       result = get_clc_variants_from_file_input("/data/test2.fasta",
       	                                        "/data/snp_contigs/",
+                                                "",
       	                                        4,
       	                                        5,
       	                                        :SNP)
@@ -123,6 +125,7 @@ describe VariantTools do
   	  expect{
       	get_clc_variants_from_file_input("/data/test3.fasta",
       	                                 "/data/snp_contigs/",
+                                         "",
       	                                 4,
       	                                 5,
       	                                 :SNP)
@@ -135,6 +138,7 @@ describe VariantTools do
   	before(:each) do
       result = get_clc_variants_from_file_input("/data/test.fasta",
       	                                         "/data/indel_test1/",
+                                                 "",
       	                                         4,
       	                                         5,
       	                                         :SNP)
