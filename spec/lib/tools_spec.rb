@@ -141,7 +141,7 @@ describe VariantTools do
                                                  "",
       	                                         4,
       	                                         5,
-      	                                         :SNP)
+      	                                         :INDEL)
       @clc_variants = result[0]
     end
 

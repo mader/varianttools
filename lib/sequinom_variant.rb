@@ -132,19 +132,6 @@ class SequinomVariant < CLCVariant
   end
 
   def to_s
-
-    # if(type.eql(VARIANT) || type == nil)
-    #   data = specimen_alts_to_s("values")
-    # end
-    # if(type.eql(COV))
-    # end
-  
-    # str = @position.to_s + "\t" + @type + "\t" + @length.to_s + "\t" + \
-    #       @ref + "\t" + data + "\t" + \
-    #        @number_of_alts.to_s + "\t" + \
-    #        crit_for_rev_bal_to_s + "\t" + @left_flank  + "\t" + \
-    #        @shared_alt + "\t" + @right_flank
-
     str = @position.to_s + "\t" + @type + "\t" + @length.to_s + "\t" + \
           @ref + "\t" + specimen_alts_and_cov_to_s("values") + "\t" + \
           @number_of_alts.to_s + "\t" + \

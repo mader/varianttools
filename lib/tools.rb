@@ -139,10 +139,10 @@ class VariantTools
 
           if(!columns.key?(locus) && @nof_contigs > 1)
             begin
-            raise IOError,"Error: Your input data does not specify a contig" \
-                  "name. But your fasta file contains more than one" \
-                  "sequence. Please use either a fasta file with just one" \
-                  "sequence, or specify the contig to use in your csv file(s)."
+            raise IOError,"Error: Your input data does not specify a contig " \
+                    "name. But your fasta file contains more than one " \
+                    "sequence. Please use either a fasta file with just one " \
+                   "sequence, or specify the contig to use in your csv file(s)."
             end
           end
 

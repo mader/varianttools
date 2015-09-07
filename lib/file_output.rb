@@ -68,16 +68,4 @@ class FileOutput
     end
   end
 
-  def write_variant_table()
-  end
-
-  def write_zygosity_table()
-  end
-
-  def write_coverage_table()
-  end
-
-  def write_frequency_table()
-  end
-
 end
