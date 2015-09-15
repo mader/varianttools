@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["malte.mader@ti.bund.de"]
   spec.summary       = %q{Process and generate different formats containing variation data}
   spec.description   = %q{Process and generate different formats containing variation data}
-  spec.homepage      = "http://github/mader/snptools"
+  spec.homepage      = "http://github/mader/varianttools"
   spec.license       = "ICS"
 
   spec.files         = ['lib/tools.rb']
