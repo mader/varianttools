@@ -359,11 +359,19 @@ def make_report_for_sequinom(contigs)
       average_forrevbal = 0
       sum_forrevbal = 0
 
+      avg_mapping_cov = 0
+      sum_mapping_cov = 0
+      nof_cov_variants = 0
+
       average_freq = 0
       sum_freq = 0
       sv.clc_variants.each do |cv|
         sum_forrevbal += cv.for_rev_balance
         sum_freq += cv.frequency
+        if(@mapping_coverages != nil && cv.mapping_coverage != -1)
+          sum_mapping_cov += cv.mapping_coverage
+          nof_cov_variants += 1
+        end
       end
       average_freq = sum_freq / sv.clc_variants.size
       sv.frequency = average_freq
@@ -371,6 +379,10 @@ def make_report_for_sequinom(contigs)
       sv.for_rev_balance = average_forrevbal
       if (average_forrevbal < 0.2 || average_forrevbal > 0.8)
         sv.critical_for_rev_balance = true
+      end
+      if(@mapping_coverages != nil)
+        avg_mapping_cov = sum_mapping_cov / nof_cov_variants
+        sv.mapping_coverage = avg_mapping_cov
       end
 
       #Make a string representging the alts of all specimen

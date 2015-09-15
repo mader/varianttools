@@ -52,6 +52,9 @@ class FileOutput
           if(options.discard_empty_fanks)
             conditions.push(!sq.left_flank.eql?("") && !sq.right_flank.eql?(""))
           end
+          if(options.mapping_coverage_thr > 0)
+            conditions.push(sq.mapping_coverage > options.mapping_coverage_thr)
+          end
           if(options.freqency_thr > 0)
             conditions.push(sq.frequency > options.freqency_thr)
           end

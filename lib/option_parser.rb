@@ -34,6 +34,7 @@ class OptionParser
     options.discard_empty_fanks = false
     options.verbose = false
     options.freqency_thr = 0.0
+    options.mapping_coverage_thr = 0
 
     optparse = OptionParser.new do |opts|
   
@@ -76,7 +77,12 @@ class OptionParser
       opts.on( '-F', '--freq [NUM]', Float, "Discard all SNPs below the",
                "provided frequency threshold" ) do |f|
         options.freqency_thr = f
-      end 
+      end
+
+      opts.on( '-m', '--mapping_cov [NUM]', Integer, "Discard all variants below the",
+               "provided mapping coverage threshold" ) do |f|
+        options.mapping_coverage_thr = f
+      end
 
       opts.on("-v", "--verbose", "Run verbosely") do |v|
         options.verbose = v

@@ -53,6 +53,10 @@ logger.info("Discard empty flanks: " + options.discard_empty_fanks.to_s)
 if(options.freqency_thr > 0)
   logger.info("Frequency threshold: " + options.freqency_thr.to_s)
 end
+if(options.mapping_coverage_thr > 0)
+  logger.info("Coverage threshold: " + options.mapping_coverage_thr.to_s)
+end
+
 
 logger.info("-----------")
 
