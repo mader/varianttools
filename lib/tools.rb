@@ -64,6 +64,8 @@ class VariantTools
 
     files.each do |file|
 
+      logger.info("Process file: " + file)
+
       name = File.basename(file).split(".")[0]
       contigs = Hash.new
       pos_and_cov = nil
