@@ -35,6 +35,7 @@ class OptionParser
     options.verbose = false
     options.freqency_thr = 0.0
     options.mapping_coverage_thr = 0
+    options.number_of_alts_thr = 0
 
     optparse = OptionParser.new do |opts|
   
@@ -50,12 +51,12 @@ class OptionParser
 
       opts.on('-i', '--input [DIR]', "Specify the input folder containing all",
                "input files. (default is .)") do |f|
-      options.input_folder = f 
+      options.input_folder = f
       end
 
       opts.on('-I', '--coverage-input [DIR]', "Specify the input folder containing all",
                "coverage files.") do |f|
-      options.coverage_input_folder = f 
+      options.coverage_input_folder = f
       end
 
       opts.on('-t', '--type OPT', [:SNP, :INDEL], "Specify the data type to be processed.",
@@ -82,6 +83,11 @@ class OptionParser
       opts.on( '-m', '--mapping_cov [NUM]', Integer, "Discard all variants below the",
                "provided mapping coverage threshold" ) do |f|
         options.mapping_coverage_thr = f
+      end
+
+      opts.on( '-a', '--number-of-called-alts [NUM]', Integer, "Discard all positions with ",
+        "less than the provided threshold of called variants" ) do |f|
+        options.number_of_alts_thr = f
       end
 
       opts.on("-v", "--verbose", "Run verbosely") do |v|

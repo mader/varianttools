@@ -56,7 +56,9 @@ end
 if(options.mapping_coverage_thr > 0)
   logger.info("Coverage threshold: " + options.mapping_coverage_thr.to_s)
 end
-
+if(options.number_of_alts_thr > 0)
+  logger.info("Number of alts threshold: " + options.number_of_alts_thr.to_s)
+end
 
 logger.info("-----------")
 

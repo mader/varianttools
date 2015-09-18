@@ -55,6 +55,9 @@ class FileOutput
           if(options.mapping_coverage_thr > 0)
             conditions.push(sq.mapping_coverage > options.mapping_coverage_thr)
           end
+          if(options.number_of_alts_thr > 0)
+            conditions.push(sq.number_of_alts > options.number_of_alts_thr)
+          end
           if(options.freqency_thr > 0)
             conditions.push(sq.frequency > options.freqency_thr)
           end
