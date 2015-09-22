@@ -257,7 +257,7 @@ def make_report_for_sequinom(contigs)
 
     v.each do |va|
 
-      all_seqinom_variants_key = va.position.to_s + va.type.to_s
+      all_seqinom_variants_key = va.position.to_s + va.type.to_s + va.length.to_s
   
       if(sequinom_variant = all_seqinom_variants[all_seqinom_variants_key])
         sequinom_variant.specimen_alts[va.specimen_name] = va.alt
@@ -266,6 +266,9 @@ def make_report_for_sequinom(contigs)
         sequinom_variant.specimen_mapping_cov[va.specimen_name] = va.mapping_coverage
         sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
         sequinom_variant.number_of_alts += 1
+        if (@mapping_coverages != nil)
+          sequinom_variant.number_of_called_refs -= 1
+        end
         sequinom_variant.clc_variants.push(va)
   
       else
@@ -275,15 +278,35 @@ def make_report_for_sequinom(contigs)
                                                va.ref,
                                                va.calling_type)
         specimen_alts = Hash.new
-
-        @specimen_names.each do |n|
-          specimen_alts.store(n, "nc")
-        end
-
         sequinom_variant.specimen_mapping_cov = Hash.new
 
+        sequinom_variant.number_of_called_refs = @specimen_names.size
+
         @specimen_names.each do |n|
-           sequinom_variant.specimen_mapping_cov.store(n, -1)
+          cov = 0
+          if (@mapping_coverages != nil)
+            if (va.length == 1)
+              cov = @mapping_coverages[n][k][va.position]
+            else
+              sum_cov = 0
+              for i in 1..va.length do
+                sum_cov += @mapping_coverages[n][k][va.position + (i-1)]
+              end
+              cov = (sum_cov.to_f/va.length).round
+            end
+            if (cov > 3)
+              sequinom_variant.specimen_mapping_cov.store(n, cov)
+              specimen_alts.store(n, va.ref)
+            else
+              sequinom_variant.specimen_mapping_cov.store(n, -1)
+              specimen_alts.store(n, "nc")
+              sequinom_variant.number_of_called_refs -= 1
+            end
+          else
+            sequinom_variant.specimen_mapping_cov.store(n, -1)
+            specimen_alts.store(n, "nc")
+            sequinom_variant.number_of_called_refs = 0
+          end
         end
 
         sequinom_variant.clc_variants = Array.new().push(va)
@@ -297,6 +320,9 @@ def make_report_for_sequinom(contigs)
         sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
         sequinom_variant.specimen_mapping_cov[va.specimen_name] = va.mapping_coverage
         sequinom_variant.number_of_alts = 1
+        if (@mapping_coverages != nil)
+          sequinom_variant.number_of_called_refs -= 1
+        end
         sequinom_variant.length = va.length
 
         all_seqinom_variants.store(all_seqinom_variants_key, sequinom_variant)
@@ -307,6 +333,7 @@ def make_report_for_sequinom(contigs)
       x.position <=> y.position
     }
 
+    
     #calculate distances to neighbouring snps
     logger.info("--> Calculate flanking sequences...")
     i = 0
@@ -417,11 +444,10 @@ def make_report_for_sequinom(contigs)
       end 
       i += 1
     end
-  
+
   sv_contigs.store(k,sequinom_variants)
   end
   logger.info("--------------------")
   return sv_contigs
-
 end
 end

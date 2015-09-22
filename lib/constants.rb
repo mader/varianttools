@@ -37,6 +37,7 @@ SEQ_COMPLEXITY    = "Sequence complexity"
 
 #Own Header definitions
 NOF_DEV_FROM_REF  = "Number Of Individual Allels Deviating From Reference"
+NOF_CALLED_REFS   = "Number Of Allels Matching The Reference With Minimal Coverage"
 CRIT_POLY_STECH   = "Crtitical Poly Strech"
 CRIT_FORREVBAL    = "Critical Forward Reverse Balance"
 LEFT_FLANK        = "Left Flank"

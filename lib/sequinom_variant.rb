@@ -22,6 +22,7 @@ require_relative '../lib/constants.rb'
 class SequinomVariant < CLCVariant
 
   attr_accessor :specimen_alts, :shared_alt, :number_of_alts,
+                :number_of_called_refs,
                 :specimen_zygs, :specimen_covs, :specimen_freqs,
                 :specimen_mapping_cov, :crit_poly_strech,
                 :critical_for_rev_balance,
@@ -50,6 +51,7 @@ class SequinomVariant < CLCVariant
     @right_flank = ""
     @shared_alt = ""
     @number_of_alts = 0
+    @number_of_called_refs = 0
     crit_poly_strech = false
     critical_for_rev_balance = false
     @dist_next_variant_left = 0
@@ -134,7 +136,7 @@ class SequinomVariant < CLCVariant
   def to_s
     str = @position.to_s + "\t" + @type + "\t" + @length.to_s + "\t" + \
           @ref + "\t" + specimen_alts_and_cov_to_s("values") + "\t" + \
-          @number_of_alts.to_s + "\t" + \
+          @number_of_alts.to_s + "\t" + @number_of_called_refs.to_s + "\t" + \
           crit_for_rev_bal_to_s + "\t" + @left_flank  + "\t" + \
           @shared_alt + "\t" + @right_flank
 

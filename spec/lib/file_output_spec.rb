@@ -175,7 +175,7 @@ describe FileOutput do
       it_behaves_like "any analysis written to file"
   end
 
-  context "processes INDEL data" do
+  context "processes INDEL data with coverage" do
 
     before(:each) do
       fasta_file = "/data/test.fasta"

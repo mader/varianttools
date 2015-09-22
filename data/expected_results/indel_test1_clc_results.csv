@@ -1,6 +1,6 @@
-Mapping	Reference Position	Type	Length	Reference (test.fasta)	indel_test1_clc (alt)	indel_test1_clc (coverage)	indel_test2_clc (alt)	indel_test2_clc (coverage)	Number Of Individual Allels Deviating From Reference	Critical Forward Reverse Balance	Left Flank	Allele	Right Flank
-test1	11	Deletion	5	TGGCG	-	-1	-	-1	2		AGCAGTGGT	[TGGCG/-]	ATGACGTAG
-test1	26	Insertion	5	-	GCTGA	-1	GCTGG	-1	2		TGACGTAGC	[-/GCTGA/GCTGG]	AGTGTGACT
-test1	36	Deletion	5	GAGCA	-	-1	-	-1	2		GTGTGACTG	[GAGCA/-]	
-test1	43	Deletion	3	ATG	-	-1	nc	-1	1			[ATG/-]	ACTGG
-test1	52	Insertion	5	-	CGCTC	-1	nc	-1	1		CTGGA	[-/CGCTC]	TTTTACGAC
+Mapping	Reference Position	Type	Length	Reference (test.fasta)	indel_test1_clc (alt)	indel_test1_clc (coverage)	indel_test2_clc (alt)	indel_test2_clc (coverage)	Number Of Individual Allels Deviating From Reference	Number Of Allels Matching The Reference With Minimal Coverage	Critical Forward Reverse Balance	Left Flank	Allele	Right Flank
+test1	11	Deletion	5	TGGCG	-	-1	-	-1	2	0		AGCAGTGGT	[TGGCG/-]	ATGACGTAG
+test1	26	Insertion	5	-	GCTGA	-1	GCTGG	-1	2	0		TGACGTAGC	[-/GCTGA/GCTGG]	AGTGTGACT
+test1	36	Deletion	5	GAGCA	-	-1	-	-1	2	0		GTGTGACTG	[GAGCA/-]	
+test1	43	Deletion	3	ATG	-	-1	nc	-1	1	0			[ATG/-]	ACTGG
+test1	52	Insertion	5	-	CGCTC	-1	nc	-1	1	0		CTGGA	[-/CGCTC]	TTTTACGAC

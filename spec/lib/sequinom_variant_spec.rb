@@ -81,6 +81,6 @@ require 'spec_helper'
 
   	it "prints out its SNP contents" do
   	  expect(@s_variant.to_s).to eql("5\tSNV\t1\tA\tA\t-1\tT\t-1\tG\t-1\t3" \
-                                     "\t0.5\tATTA\t[A/T/G]\tGCCG")
+                                     "\t0\t0.5\tATTA\t[A/T/G]\tGCCG")
   	end
   end

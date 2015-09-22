@@ -39,7 +39,7 @@ class FileOutput
         if(header)
           f.puts MAPPING + "\t" + REFPOS + "\t" + TYPE + "\t" + LENGTH + "\t" + REF + " (#{ref_name})" + "\t" + \
           v[0].specimen_alts_and_cov_to_s("keys") + "\t" + \
-          NOF_DEV_FROM_REF + "\t" + \
+          NOF_DEV_FROM_REF + "\t" + NOF_CALLED_REFS + "\t" +\
           CRIT_FORREVBAL + "\t" + LEFT_FLANK + "\t" + \
           ALT + "\t" + RIGHT_FLANK
           header = false
@@ -67,7 +67,7 @@ class FileOutput
           end
 
           if(filter)
-           f.puts k + "\t" + sq.to_s
+            f.puts k + "\t" + sq.to_s
           end
         end
       end

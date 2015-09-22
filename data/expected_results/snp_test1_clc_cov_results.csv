@@ -1,10 +1,10 @@
-Mapping	Reference Position	Type	Length	Reference (test.fasta)	snp_test1_clc (alt)	snp_test1_clc (coverage)	snp_test2_clc (alt)	snp_test2_clc (coverage)	snp_test3_clc (alt)	snp_test3_clc (coverage)	Number Of Individual Allels Deviating From Reference	Critical Forward Reverse Balance	Left Flank	Allele	Right Flank
-test1	10	SNP	1	T	A	8	A	9	C	10	3	0.119	TAGCAGTGG	[T/A/C]	TGGCGATGA
-test1	21	MNP	2	GT	AC	12	AC	13	nc	-1	2		GGCGATGAC	[GT/AC]	AGCAG
-test1	21	SNP	1	G	nc	-1	nc	-1	T	14	1		GGCGATGAC	[G/T]	TAGCA
-test1	30	SNP	1	T	A	12	A	13	nc	-1	2		CAGTG	[T/A]	GACTGGAGC
-test1	41	Deletion	3	CGA	-	14	-	15	nc	-1	2		ACTGGAGCA	[CGA/-]	TGACT
-test1	51	Insertion	3	-	GGC	17	GGC	18	TA	19	3		ACTGG	[-/GGC/TA]	ATTTTACGA
-test1	61	Deletion	1	G	-	21	nc	-1	nc	-1	1		TTTTACGAC	[G/-]	CATAGGCAC
-test1	72	SNP	1	T	nc	-1	nc	-1	G	23	1		ATAGGCACT	[T/G]	
-test1	77	SNP	1	T	nc	-1	nc	-1	C	24	1			[T/C]	
+Mapping	Reference Position	Type	Length	Reference (test.fasta)	snp_test1_clc (alt)	snp_test1_clc (coverage)	snp_test2_clc (alt)	snp_test2_clc (coverage)	snp_test3_clc (alt)	snp_test3_clc (coverage)	Number Of Individual Allels Deviating From Reference	Number Of Allels Matching The Reference With Minimal Coverage	Critical Forward Reverse Balance	Left Flank	Allele	Right Flank
+test1	10	SNP	1	T	A	8	A	9	C	10	3	0	0.119	TAGCAGTGG	[T/A/C]	TGGCGATGA
+test1	21	MNP	2	GT	AC	12	AC	13	GT	14	2	1		GGCGATGAC	[GT/AC]	AGCAG
+test1	21	SNP	1	G	G	12	G	13	T	14	1	2		GGCGATGAC	[G/T]	TAGCA
+test1	30	SNP	1	T	A	12	A	13	T	14	2	1		CAGTG	[T/A]	GACTGGAGC
+test1	41	Deletion	3	CGA	-	14	-	15	CGA	16	2	1		ACTGGAGCA	[CGA/-]	TGACT
+test1	51	Insertion	3	-	GGC	17	GGC	18	TA	19	3	0		ACTGG	[-/GGC/TA]	ATTTTACGA
+test1	61	Deletion	1	G	-	21	G	22	G	23	1	2		TTTTACGAC	[G/-]	CATAGGCAC
+test1	72	SNP	1	T	T	21	T	22	G	23	1	2		ATAGGCACT	[T/G]	
+test1	77	SNP	1	T	T	22	T	23	C	24	1	2			[T/C]	
