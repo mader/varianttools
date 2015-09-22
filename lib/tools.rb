@@ -25,7 +25,7 @@ require 'logger'
 class VariantTools
 
   attr_accessor :specimen_names, :ref_seq, :ref_length, :min_flank1,
-                :min_flank2, :type, :logger, :mapping_coverages
+                :min_flank2, :min_cov_for_ref, :type, :logger, :mapping_coverages
 
   def initialize(ref_seq, min_flank1, min_flank2, type, logger)
     @specimen_names = Array.new
@@ -33,6 +33,7 @@ class VariantTools
     @ref_length = Hash.new
     @min_flank1 = min_flank1
     @min_flank2 = min_flank2
+    @min_cov_for_ref = 3
     @type = type
     @contig = ""
     @nof_contigs = 0
@@ -294,7 +295,7 @@ def make_report_for_sequinom(contigs)
               end
               cov = (sum_cov.to_f/va.length).round
             end
-            if (cov > 3)
+            if (cov >= @min_cov_for_ref)
               sequinom_variant.specimen_mapping_cov.store(n, cov)
               specimen_alts.store(n, va.ref)
             else

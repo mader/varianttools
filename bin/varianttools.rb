@@ -51,6 +51,7 @@ logger.info("Data type: " + options.type.to_s)
 logger.info("Flanking length: " + options.flanks[0].to_s + ", " + \
                                   options.flanks[1].to_s)
 logger.info("Discard empty flanks: " + options.discard_empty_fanks.to_s)
+logger.info("Minimum coverage for reference base calling: " + options.min_cov_for_ref_thr.to_s)
 if(options.freqency_thr > 0)
   logger.info("Frequency threshold: " + options.freqency_thr.to_s)
 end
@@ -68,6 +69,10 @@ snp_tools = VariantTools.new(options.ref_file,
                          options.flanks[1].to_i,
                          options.type,
                          logger)
+
+if(options.min_cov_for_ref_thr != 3)
+  snp_tools.min_cov_for_ref = options.min_cov_for_ref_thr
+end
 
 if(!options.coverage_input_folder.eql?(""))
   logger.info("Read coverage files...")
