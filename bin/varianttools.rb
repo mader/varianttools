@@ -61,7 +61,9 @@ end
 if(options.number_of_alts_thr > 0)
   logger.info("Number of alts threshold: " + options.number_of_alts_thr.to_s)
 end
-
+if(options.number_of_alts_thr > 0)
+  logger.info("Number of refs threshold: " + options.number_of_refs_thr.to_s)
+end
 logger.info("-----------")
 
 snp_tools = VariantTools.new(options.ref_file,

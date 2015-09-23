@@ -255,24 +255,32 @@ def make_report_for_sequinom(contigs)
     #find and merge redundant snps
     logger.info("--> Merge redundant variants...")
     all_seqinom_variants = Hash.new
+    #nof_vas_per_contig = Hash.new
 
     v.each do |va|
 
       all_seqinom_variants_key = va.position.to_s + va.type.to_s + va.length.to_s
   
       if(sequinom_variant = all_seqinom_variants[all_seqinom_variants_key])
-        sequinom_variant.specimen_alts[va.specimen_name] = va.alt
-        sequinom_variant.specimen_zygs[va.specimen_name] = va.zygosity
-        sequinom_variant.specimen_covs[va.specimen_name] = va.coverage
-        sequinom_variant.specimen_mapping_cov[va.specimen_name] = va.mapping_coverage
-        sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
-        sequinom_variant.number_of_alts += 1
-        if (@mapping_coverages != nil)
-          sequinom_variant.number_of_called_refs -= 1
+        if(sequinom_variant.specimen_zygs.has_key?(va.specimen_name))
+          alt = sequinom_variant.specimen_alts[va.specimen_name]
+          sequinom_variant.specimen_alts[va.specimen_name] = alt + "/" + va.alt
+          sequinom_variant.number_of_alts += 1
+        else
+          sequinom_variant.specimen_alts[va.specimen_name] = va.alt
+          sequinom_variant.specimen_zygs[va.specimen_name] = va.zygosity
+          sequinom_variant.specimen_covs[va.specimen_name] = va.coverage
+          sequinom_variant.specimen_mapping_cov[va.specimen_name] = va.mapping_coverage
+          sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
+          sequinom_variant.number_of_alts += 1
+          if (@mapping_coverages != nil && va.mapping_coverage > @min_cov_for_ref)
+            sequinom_variant.number_of_called_refs -= 1
+          end
+          sequinom_variant.clc_variants.push(va)
         end
-        sequinom_variant.clc_variants.push(va)
   
       else
+
         sequinom_variant = SequinomVariant.new(va.position,
                                                va.type,
                                                va.length,
@@ -281,7 +289,7 @@ def make_report_for_sequinom(contigs)
         specimen_alts = Hash.new
         sequinom_variant.specimen_mapping_cov = Hash.new
 
-        sequinom_variant.number_of_called_refs = @specimen_names.size
+        sequinom_variant.number_of_called_refs = 0
 
         @specimen_names.each do |n|
           cov = 0
@@ -295,18 +303,17 @@ def make_report_for_sequinom(contigs)
               end
               cov = (sum_cov.to_f/va.length).round
             end
-            if (cov >= @min_cov_for_ref)
+            if (cov > @min_cov_for_ref)
               sequinom_variant.specimen_mapping_cov.store(n, cov)
               specimen_alts.store(n, va.ref)
+              sequinom_variant.number_of_called_refs += 1
             else
               sequinom_variant.specimen_mapping_cov.store(n, -1)
               specimen_alts.store(n, "nc")
-              sequinom_variant.number_of_called_refs -= 1
             end
           else
             sequinom_variant.specimen_mapping_cov.store(n, -1)
             specimen_alts.store(n, "nc")
-            sequinom_variant.number_of_called_refs = 0
           end
         end
 
@@ -321,7 +328,7 @@ def make_report_for_sequinom(contigs)
         sequinom_variant.specimen_freqs[va.specimen_name] = va.frequency
         sequinom_variant.specimen_mapping_cov[va.specimen_name] = va.mapping_coverage
         sequinom_variant.number_of_alts = 1
-        if (@mapping_coverages != nil)
+        if (@mapping_coverages != nil && va.mapping_coverage > @min_cov_for_ref)
           sequinom_variant.number_of_called_refs -= 1
         end
         sequinom_variant.length = va.length

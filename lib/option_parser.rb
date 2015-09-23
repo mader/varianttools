@@ -36,6 +36,7 @@ class OptionParser
     options.freqency_thr = 0.0
     options.mapping_coverage_thr = 0
     options.number_of_alts_thr = 0
+    options.number_of_refs_thr = 0
     options.min_cov_for_ref_thr = 3
 
     optparse = OptionParser.new do |opts|
@@ -89,6 +90,11 @@ class OptionParser
       opts.on( '-a', '--number-of-called-alts [NUM]', Integer, "Discard all positions with ",
         "less than the provided threshold of called variants" ) do |f|
         options.number_of_alts_thr = f
+      end
+
+      opts.on( '-r', '--number-of-called-refs [NUM]', Integer, "Discard all positions with ",
+        "less than the provided threshold of called references" ) do |f|
+        options.number_of_refs_thr = f
       end
 
       opts.on( '-c', '--minimum-coverage-for-ref [NUM]', Integer, "Provide a minimum coverage threshold  ",
