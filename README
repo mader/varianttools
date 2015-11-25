@@ -1,0 +1,7 @@
+### Variant Tools
+
+A tool for generating variant matrices of multiple individuals produced by 
+the CLC Genomics Workbench.
+
+For all processing options type ./varianttools -h
+
