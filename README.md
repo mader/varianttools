@@ -1,4 +1,4 @@
-### Variant Tools
+### Variant Tools [![Build Status](https://travis-ci.org/ThuenenFG/varianttools.svg?branch=master)](https://travis-ci.org/ThuenenFG/varianttools)
 
 A tool for generating variant matrices of multiple individuals produced by 
 the CLC Genomics Workbench.
