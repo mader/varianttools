@@ -20,6 +20,7 @@ GEM
     logger (1.2.8)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    rake (10.4.2)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -43,4 +44,5 @@ DEPENDENCIES
   byebug (>= 6.0.2)
   cucumber (>= 2.0.2)
   logger (>= 1.2.8)
+  rake (~> 10.4, >= 10.4.2)
   rspec (>= 3.3.0)
