@@ -102,10 +102,6 @@ class OptionParser
         options.min_cov_for_ref_thr = f
       end
 
-      opts.on("-v", "--verbose", "Run verbosely") do |v|
-        options.verbose = v
-      end
-
       opts.on('-h', '--help', 'Display this screen') do
         puts opts
         exit
