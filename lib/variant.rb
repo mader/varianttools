@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 =begin
-  Copyright (c) 2014-2015 Malte Mader <malte.mader@ti.bund.de>
+  Copyright (c) 2014-2015 Malte Mader <malte.mader@thuenen.de>
   Copyright (c) 2014-2015 Thünen Institute of Forest Genetics
 
   Permission to use, copy, modify, and distribute this software for any

@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = APP_NAME
   spec.version       = VERSION
   spec.authors       = ["Malte Mader"]
-  spec.email         = ["malte.mader@ti.bund.de"]
+  spec.email         = ["malte.mader@thuenen.de"]
   spec.summary       = %q{Process and generate different formats containing variation data}
   spec.description   = %q{Process and generate different formats containing variation data}
   spec.homepage      = "http://github/mader/varianttools"
