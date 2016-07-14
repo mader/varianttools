@@ -1,5 +1,7 @@
 ### Variant Tools [![Build Status](https://travis-ci.org/ThuenenFG/varianttools.svg?branch=master)](https://travis-ci.org/ThuenenFG/varianttools)
 
+[![Join the chat at https://gitter.im/ThuenenFG/varianttools](https://badges.gitter.im/ThuenenFG/varianttools.svg)](https://gitter.im/ThuenenFG/varianttools?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A tool for generating variant matrices of multiple individuals produced by 
 the CLC Genomics Workbench (CLC GWB).
 
