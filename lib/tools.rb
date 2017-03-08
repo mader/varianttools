@@ -19,6 +19,7 @@
 require_relative '../lib/constants.rb'
 require_relative '../lib/clc_variant.rb'
 require_relative '../lib/sequinom_variant.rb'
+require_relative '../lib/variant_stats.rb'
 require 'bio'
 require 'logger'
 
@@ -243,6 +244,67 @@ class VariantTools
   end
 
   return contigs
+end
+
+def make_stats(contigs)
+  specimen = Hash.new
+  contigs.each do |k, variants|
+    variants.each_with_index do |v,i|
+      if(stat = specimen[v.specimen_name])
+        if(@type.to_s.eql?(SNP))
+          stat.set_values(v.coverage, "coverage")
+          stat.set_values(v.frequency, "frequency")
+          stat.set_values(v.quality, "quality")
+        end
+        if(stat.var_type[v.type])
+          stat.var_type[v.type] += 1
+        else
+          stat.var_type.store(v.type, 1)
+        end
+        stat.nof_variants += 1
+      else
+        stats = VariantStats.new(v.specimen_name,
+                                 v.coverage,
+                                 v.frequency,
+                                 v.quality,
+                                 v.nof_reads,
+                                 v.type,
+                                 @type)
+        specimen.store(v.specimen_name, stats)
+      end
+    end
+    @specimen_names.each do |n|
+      if(!specimen[n])
+        specimen.store(n, VariantStats.new(n,0,0,0,0,"", @type))
+      end
+    end
+  end
+
+  header = true
+
+  open('stats.tsv', 'w') do |f|
+    if(header)
+          if(@type.to_s.eql?(SNP))
+            header_line = "Name\tNOF SNPs\tMin Cov\tMax Cov\tAVG Cov\tMin Freq\t" \
+                   "Max Freq\tAVG Freq\tMin Qual\tMax Qual\tAVG Qual\tSNP\tMNP\t" \
+                   "Insertion\tDeletion"
+          end
+          if(@type.to_s.eql?(INDEL))
+            header_line = "Name\tNOF INDELs\t" \
+                   "Insertion\tDeletion"
+          end
+          f.puts header_line + "\n"
+          header = false
+        end
+    specimen.each do |k,s|
+      if(@type.to_s.eql?(SNP))
+        s.calc_average(s.coverage)
+        s.calc_average(s.frequency)
+        s.calc_average(s.quality)
+      end
+      f.puts s.to_s(@type)
+    end
+  end
 end
 
 def make_report_for_sequinom(contigs)

@@ -94,6 +94,9 @@ rescue IOError => e
 end
 
 logger.info("Generate summary table...")
+snp_tools.make_stats(variants)
+
+logger.info("Generate summary table...")
 s_variants = snp_tools.make_report_for_sequinom(variants)
 
 logger.info("Write data to file...")
