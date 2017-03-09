@@ -256,6 +256,9 @@ def make_stats(contigs)
           stat.set_values(v.frequency, "frequency")
           stat.set_values(v.quality, "quality")
         end
+        if(@type.to_s.eql?(INDEL))
+          stat.set_values(v.nof_reads, "nof_reads")
+        end
         if(stat.var_type[v.type])
           stat.var_type[v.type] += 1
         else
@@ -263,6 +266,7 @@ def make_stats(contigs)
         end
         stat.nof_variants += 1
       else
+        #puts v.specimen_name + " " + v.nof_reads.to_s
         stats = VariantStats.new(v.specimen_name,
                                  v.coverage,
                                  v.frequency,
@@ -273,12 +277,13 @@ def make_stats(contigs)
         specimen.store(v.specimen_name, stats)
       end
     end
-    @specimen_names.each do |n|
+  end
+
+  @specimen_names.each do |n|
       if(!specimen[n])
         specimen.store(n, VariantStats.new(n,0,0,0,0,"", @type))
       end
     end
-  end
 
   header = true
 
@@ -290,8 +295,8 @@ def make_stats(contigs)
                    "Insertion\tDeletion"
           end
           if(@type.to_s.eql?(INDEL))
-            header_line = "Name\tNOF INDELs\t" \
-                   "Insertion\tDeletion"
+            header_line = "Name\tNOF INDELs\tMin NOF Reads\tMax NOF Reads\t" \
+                   "AVG NOG Reads\tInsertion\tDeletion"
           end
           f.puts header_line + "\n"
           header = false
@@ -301,6 +306,9 @@ def make_stats(contigs)
         s.calc_average(s.coverage)
         s.calc_average(s.frequency)
         s.calc_average(s.quality)
+      end
+      if(@type.to_s.eql?(INDEL))
+          s.calc_average(s.nof_reads)
       end
       f.puts s.to_s(@type)
     end

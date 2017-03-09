@@ -52,11 +52,16 @@ class VariantStats
     @quality[0] = quality
     @quality[1] = quality
     @quality[2] = quality
+    @nof_reads = Array.new
+    @nof_reads[0] = nof_reads
+    @nof_reads[1] = nof_reads
+    @nof_reads[2] = nof_reads
     @var_type = Hash.new
     if(!var_type.eql?(""))
       @var_type.store(var_type, 1)
     end
     @type = type
+    #puts @specimen + " " + @nof_reads[0].to_s + " " + @nof_reads[1].to_s
   end
   
   def calc_average(arr)
@@ -72,6 +77,7 @@ class VariantStats
       when "coverage" then @coverage
       when "frequency" then @frequency
       when "quality" then @quality
+      when "nof_reads" then @nof_reads
       else "invalid"
     end
 
@@ -99,7 +105,8 @@ class VariantStats
           "#{@var_type["Insertion"]}\t#{@var_type["Deletion"]}\n"
     end
     if(type.to_s.eql?(INDEL))
-      str = "#{@specimen}\t#{@nof_variants}\t" \
+      str = "#{@specimen}\t#{@nof_variants}\t#{@nof_reads[0]}\t" \
+            "#{@nof_reads[1]}\t#{@nof_reads[3]}\t" \
             "#{@var_type["Insertion"]}\t#{@var_type["Deletion"]}\n"
     end
     return str
